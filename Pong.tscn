@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/ball.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/player2-paddle.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/P2Score.cs" type="Script" id=5]
 [ext_resource path="res://Scripts/P1Score.cs" type="Script" id=6]
+[ext_resource path="res://Scripts/Pong.cs" type="Script" id=7]
+[ext_resource path="res://Scripts/Ball.cs" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 450, 15 )
@@ -31,6 +33,7 @@ size = 50
 font_data = SubResource( 6 )
 
 [node name="2D Scene" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -69,9 +72,9 @@ texture = ExtResource( 4 )
 position = Vector2( 0, -1.93872 )
 physics_material_override = SubResource( 3 )
 gravity_scale = 0.0
-linear_velocity = Vector2( 250, 250 )
 linear_damp = 0.0
 angular_damp = 0.0
+script = ExtResource( 8 )
 
 [node name="BallSprite" type="Sprite" parent="Ball"]
 texture = ExtResource( 1 )
@@ -114,7 +117,9 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="body_entered" from="P2Goal" to="." method="_onP2GoalEntered"]
 [connection signal="body_entered" from="P2Goal" to="P1Score" method="_OnP2GoalEntered"]
+[connection signal="body_entered" from="P1Goal" to="." method="_OnP1GoalEntered"]
 [connection signal="body_entered" from="P1Goal" to="P2Score" method="_OnP1GoalEntered"]
 
 [editable path="Player2"]
