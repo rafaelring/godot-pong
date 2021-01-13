@@ -97,7 +97,7 @@ shape = SubResource( 5 )
 [node name="P2Score" type="RichTextLabel" parent="."]
 margin_left = 32.0
 margin_top = -24.0
-margin_right = 64.0
+margin_right = 131.0
 margin_bottom = 32.0
 custom_fonts/normal_font = SubResource( 7 )
 text = "0"
@@ -107,10 +107,10 @@ __meta__ = {
 }
 
 [node name="P1Score" type="RichTextLabel" parent="."]
-margin_left = -56.0
-margin_top = -24.0
-margin_right = -14.0
-margin_bottom = 36.0
+margin_left = -80.6942
+margin_top = -22.8775
+margin_right = 0.305847
+margin_bottom = 37.1225
 custom_fonts/normal_font = SubResource( 7 )
 text = "0"
 script = ExtResource( 6 )

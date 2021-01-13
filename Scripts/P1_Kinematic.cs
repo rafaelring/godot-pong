@@ -27,4 +27,11 @@ public class P1_Kinematic : KinematicBody2D
 		MoveAndSlide(velocity.Normalized() * speed);
 	}
 
+	public void Reset()
+	{
+		var newTransform = this.Transform;
+		newTransform.origin = new Vector2(this.Transform.origin.x, 0f);
+		this.Transform = newTransform;
+	}
+
 }
