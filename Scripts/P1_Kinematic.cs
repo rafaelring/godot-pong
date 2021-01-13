@@ -3,9 +3,6 @@ using System;
 
 public class P1_Kinematic : KinematicBody2D
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
 
 	[Export] public int speed = 600;
 	[Export] public String key_up = "p1_move_up";
@@ -30,9 +27,4 @@ public class P1_Kinematic : KinematicBody2D
 		MoveAndSlide(velocity.Normalized() * speed);
 	}
 
-	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-	//  public override void _Process(float delta)
-	//  {
-	//      
-	//  }
 }

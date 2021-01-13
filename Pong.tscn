@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/ball.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/wall.png" type="Texture" id=3]
 [ext_resource path="res://Assets/player2-paddle.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/P2Score.cs" type="Script" id=5]
+[ext_resource path="res://Scripts/P1Score.cs" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 450, 15 )
@@ -11,12 +13,22 @@ extents = Vector2( 450, 15 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 450, 15 )
 
-[sub_resource type="PhysicsMaterial" id=4]
+[sub_resource type="PhysicsMaterial" id=3]
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5, 5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 26.794, 283.07 )
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://Assets/consolas/Consolas.ttf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 50
+font_data = SubResource( 6 )
 
 [node name="2D Scene" type="Node2D"]
 
@@ -55,7 +67,7 @@ texture = ExtResource( 4 )
 
 [node name="Ball" type="RigidBody2D" parent="."]
 position = Vector2( 0, -1.93872 )
-physics_material_override = SubResource( 4 )
+physics_material_override = SubResource( 3 )
 gravity_scale = 0.0
 linear_velocity = Vector2( 250, 250 )
 linear_damp = 0.0
@@ -65,6 +77,44 @@ angular_damp = 0.0
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
+
+[node name="P2Goal" type="Area2D" parent="."]
+position = Vector2( 479.291, 1.12247 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P2Goal"]
+shape = SubResource( 5 )
+
+[node name="P1Goal" type="Area2D" parent="."]
+position = Vector2( -479.316, -0.659332 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P1Goal"]
+shape = SubResource( 5 )
+
+[node name="P2Score" type="RichTextLabel" parent="."]
+margin_left = 32.0
+margin_top = -24.0
+margin_right = 64.0
+margin_bottom = 32.0
+custom_fonts/normal_font = SubResource( 7 )
+text = "0"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P1Score" type="RichTextLabel" parent="."]
+margin_left = -56.0
+margin_top = -24.0
+margin_right = -14.0
+margin_bottom = 36.0
+custom_fonts/normal_font = SubResource( 7 )
+text = "0"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="P2Goal" to="P1Score" method="_OnP2GoalEntered"]
+[connection signal="body_entered" from="P1Goal" to="P2Score" method="_OnP1GoalEntered"]
 
 [editable path="Player2"]
